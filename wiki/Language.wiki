@@ -57,7 +57,7 @@ p<-F{len > 1000b}; <br>
 q<-F{len > 2000b}; <br>
 n = p*q; <br>
 fi = phi(p,q); <br>
-e<-[1,fi-1]; <br>
+e<-`[`1,fi-1`]`; <br>
 d = mul_inv(e,fi); <br>
 A: c = m^e(mod n); <br>
 B: m = m^d(mod n);
