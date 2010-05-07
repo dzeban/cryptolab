@@ -52,14 +52,24 @@
 
 == Примеры ==
 === RSA ===
-Field F{int}; <br>
-p<-F{len > 1000b}; <br>
-q<-F{len > 2000b}; <br>
-n = p*q; <br>
-fi = phi(p,q); <br>
-e<-`[`1,fi-1`]`; <br>
-d = mul_inv(e,fi); <br>
-A: c = m^e(mod n); <br>
+{{{
+Field F{int}; 
+p<-F{len > 1000b};
+q<-F{len > 2000b};
+n = p*q; 
+fi = phi(p,q);
+e<-`[`1,fi-1`]`;
+d = mul_inv(e,fi);
+A: c = m^e(mod n);
 B: m = m^d(mod n);
+}}}
 === DH ===
-...
+{{{
+Group G{int,gener(a)};
+x = random([1,a]);
+ax = a^x;
+send(ax,B);
+
+y = receive(B);
+key = ax^y;
+}}}
