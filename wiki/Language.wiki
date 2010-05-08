@@ -65,8 +65,10 @@ B: m = m^d(mod n);
 }}}
 === DH ===
 {{{
-Group G{int,gener(a)};
-x = random([1,a]);
+Field F{int};
+a<-F{len > 10b};
+Group G{int,gen(a)};
+x<-[1,a];
 ax = a^x;
 send(ax,B);
 
