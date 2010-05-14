@@ -65,7 +65,7 @@ echo "Please type number to encrypt:";	        \\просим пользоват
 m = scan(stdin);				\\считываем с клавиатуры
 c = m^e(mod n); 				\\шифруем: с = m в степени e по модулю n
 mm = c^d(mod n);				\\расшифровываем
-if(mm == m) echo "All done";			\\сравниваем исходные сообщения
+if(mm == m) echo "All done";			\\сравниваем сообщения
 	else echo "Error";
 }}}
 === DH ===
@@ -79,8 +79,8 @@ x<-[1,a];					\\Берем случайное x из промежутка от 1
 ax = a^x;					\\ax = a в степени x
 y<-[1,a];
 ay = a^y;
-k = a^(x*y)
-
-y = receive(B);
-key = ax^y;
+key_a = ax^y;					\\Вычисляем ключи
+key_b = ay^x;
+if(key_a == key_b) echo "All done";		\\сравниваем полученные ключи
+	else echo "Error";
 }}}
