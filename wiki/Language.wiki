@@ -65,8 +65,8 @@ echo "Please type number to encrypt:";	        //просим пользоват
 m = scan(stdin);				//считываем с клавиатуры
 c = m^e(mod n); 				//шифруем: с = m в степени e по модулю n
 mm = c^d(mod n);				//расшифровываем
-if(mm == m) echo "All done";			//сравниваем сообщения
-	else echo "Error";
+if(mm == m) echo "Perfect\n";			//сравниваем сообщения
+	else echo "Error\n";
 }}}
 === DH ===
 {{{
@@ -81,16 +81,30 @@ y<-[1,a];
 ay = a^y(mod p);
 key_a = ax^y(mod 2^64);				//Вычисляем ключи
 key_b = ay^x(mod 2^64);
-if(key_a == key_b) echo "All done";		//сравниваем полученные ключи
-	else echo "Error";
+if(key_a == key_b) echo "Perfect\n";		//сравниваем полученные ключи
+	else echo "Error\n";
 }}}
 === EG ===
 {{{
 /*Реализация протокола Эль-Гамаля на одной вычислительной машине*/
 
+function f(m,by,p) = m + by(mod p);
+function ff(c,by,p) = c - by(mod p)
+
 Field F{int,order(p=60003)};
 Group G{mul(F),gen(a)};
-function f(m,by,p)=m + by(mod p);
 x<-F{prime};
+b = a^x;
+y<-F;
+ay = a^y;
+by = b^y;
+echo "Please type number to encrypt:";
+m = scan(stdin);
+c = f(m,by,p);
+echo "Encrypted message: ($c,$ay)";
 
+byy = ay^x;
+mm = ff(c,byy,p);
+if(mm == m) echo "Perfect\n";
+	else echo "Error\n";
 }}}
