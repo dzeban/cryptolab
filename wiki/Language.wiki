@@ -101,7 +101,7 @@ by = b^y;
 echo "Please type number to encrypt:";
 m = scan(stdin);
 c = f(m,by,p);
-echo "Encrypted message: ($c,$ay)";
+echo "Encrypted message: [$c,$ay]\n";
 
 byy = ay^x;
 mm = ff(c,byy,p);
