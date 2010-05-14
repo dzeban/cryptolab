@@ -88,5 +88,9 @@ if(key_a == key_b) echo "All done";		//сравниваем полученные
 {{{
 /*Реализация протокола Эль-Гамаля на одной вычислительной машине*/
 
-Field F{int};
+Field F{int,order(p=60003)};
+Group G{mul(F),gen(a)};
+function f(m,by,p)=m + by(mod p);
+x<-F{prime};
+
 }}}
