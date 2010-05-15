@@ -1,0 +1,21 @@
+/*Реализация протокола Эль-Гамаля на одной вычислительной машине*/
+
+function f(m,by,p) = m + by(mod p);             //Объявляем фунцию зашифрования
+function ff(c,by,p) = c - by(mod p);            //Объявляем фунцию расшифрования
+
+Field F{int,order(p=60003)};
+Group G{mul(F),gen(a)};
+x<-F{prime};
+b = a^x;
+y<-F;
+ay = a^y;
+by = b^y;
+echo "Please type number to encrypt:";
+m = scan(stdin);
+c = f(m,by,p);
+echo "Encrypted message: [$c,$ay]\n";
+
+byy = ay^x;
+mm = ff(c,byy,p);
+if(mm == m) echo "Perfect\n";
+        else echo "Error\n";
