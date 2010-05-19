@@ -18,6 +18,6 @@
 ||Символ Лежандра|| int gmp_legendre (resource a, resource p) ||
 ||Разложение на множители|| ||
 ||Поиск простых чисел|| ||
-||Проверка на простоту|| int gmp_prob_prime (resource a [, int reps]) ||
+||Проверка на простоту|| int gmp_prob_prime (resource a [, int reps] ) ||
 ||Генерация случайных чисел|| ||
 ||Целочисленный корень|| resource gmp_sqrt (resource a) ||
