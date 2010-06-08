@@ -7,17 +7,17 @@
 
 
 || *Примитив* || *Реализован в GMP* || *Комментарий* ||
-||Простые арифметические операции|| resource gmp_add (resource a, resource b)||+,-,`*`,/,^,%||
-||Модульная арифметика|| ||+(mod), -(mod), `*`(mod), /(mod), ^(mod)||
-||Сравнения|| ||<,>,<=,>=, !=, ==||
-||НОД|| resource gmp_gcd (resource a, resource b) ||
-||НОК|| ||
+||Простые арифметические операции|| resource gmp_add (resource a, resource b) для сложения <br> resource gmp_sub (resource a, resource b) для вычитания <br>  resource gmp_neg (resource a) для возврата отрицательного числа <br> resource gmp_mul (resource a, resource b) для умножения <br> resource gmp_div_q (resource a, resource b [, int round]) для целочисленного деления <br> array gmp_div_qr (resource n, resource d [, int round]) для вычисления частного и остатка <br> resource gmp_divexact (resource n, resource d) для быстрого деления при условии, что числа делятся нацело <br> resource gmp_pow (resource base, int exp) для возведения в степень <br> resource gmp_div_r (resource n, resource d [, int round]) для вычисления остатка от деления||+,-,`*`,/,^,%||
+||Модульная арифметика|| resource gmp_powm (resource base, resource exp, resource mod) для возведения в степень по модулю ||+(mod), -(mod), `*`(mod), /(mod), ^(mod)||
+||Сравнения|| int gmp_cmp (resource a, resource b) ||<,>,<=,>=, !=, ==||
+||НОД|| resource gmp_gcd (resource a, resource b) <br> array gmp_gcdext (resource a, resource b) для вычисления НОД и множителей||
+||НОК|| - ||
 ||Мультипликативно обратное|| resource gmp_invert (resource a, resource b) ||
-||Функция Эйлера|| ||
+||Функция Эйлера|| - ||
 ||Символ Якоби|| int gmp_jacobi (resource a, resource p) ||
 ||Символ Лежандра|| int gmp_legendre (resource a, resource p) ||
-||Разложение на множители|| ||
-||Поиск простых чисел|| ||
+||Разложение на множители|| - ||
+||Поиск простых чисел|| - ||
 ||Проверка на простоту|| int gmp_prob_prime (resource a [, int reps] ) ||
-||Генерация случайных чисел|| ||
+||Генерация случайных чисел|| resource gmp_random (int limiter) только от нуля до параметра ||
 ||Целочисленный корень|| resource gmp_sqrt (resource a) ||
