@@ -11,13 +11,13 @@
 ||Модульная арифметика|| resource gmp_powm (resource base, resource exp, resource mod) для возведения в степень по модулю ||+(mod), -(mod), `*`(mod), /(mod), ^(mod)||
 ||Сравнения|| int gmp_cmp (resource a, resource b) ||<,>,<=,>=, !=, ==||
 ||НОД|| resource gmp_gcd (resource a, resource b) <br> array gmp_gcdext (resource a, resource b) для вычисления НОД и множителей||
-||НОК|| - ||
+||НОК|| gmp_lcm(resource a, resource b) ||
 ||Мультипликативно обратное|| resource gmp_invert (resource a, resource b) ||
 ||Функция Эйлера|| - ||
 ||Символ Якоби|| int gmp_jacobi (resource a, resource p) ||
 ||Символ Лежандра|| int gmp_legendre (resource a, resource p) ||
 ||Разложение на множители|| - ||
-||Поиск простых чисел|| - ||
+||Поиск простых чисел|| gmp_next_prime ||
 ||Проверка на простоту|| int gmp_prob_prime (resource a [, int reps] ) ||
 ||Генерация случайных чисел|| resource gmp_random (int limiter) только от нуля до параметра ||
 ||Целочисленный корень|| resource gmp_sqrt (resource a) ||
