@@ -17,7 +17,7 @@
 ||Символ Якоби|| int gmp_jacobi (resource a, resource p) ||
 ||Символ Лежандра|| int gmp_legendre (resource a, resource p) ||
 ||Разложение на множители|| - ||
-||Поиск простых чисел|| gmp_next_prime ||
+||Поиск простых чисел|| resource gmp_nextprime ( int $a ) ||
 ||Проверка на простоту|| int gmp_prob_prime (resource a [, int reps] ) ||
 ||Генерация случайных чисел|| resource gmp_random (int limiter) только от нуля до параметра ||
 ||Целочисленный корень|| resource gmp_sqrt (resource a) ||
