@@ -40,4 +40,46 @@ PARI / GP одновременно поддерживает две версии 
 
 Стоимость подписки зависит от типа процессора. В общем случае 3 года подписки для одного или нескольких настольных компьютеров в учебном заведении (каждый из которых не более 4 ядер) будут стоить US $ 1200 для одной машины, 1800 долл. США на тот же срок на 4 машины, US $ 2400 на 8 машин и т. д. Цены в коммерческих и государственных организаций выше.
 
-Сокращенная по стоимости студент-версия доступна для ПК (Windows / Linux) и компьютеров Mac (OS X). Студент-версия ограничена рабочей областью 150 мегабайт, и некоторые дополнительные функции, опущены.
+Сокращенная по стоимости студент-версия доступна для ПК (Windows / Linux) и компьютеров Mac (OS X). Студент-версия ограничена рабочей областью 150 мегабайт, и некоторые дополнительные функции опущены.
+
+На официальном сайте Magma для пользователей доступен online-calculator Magma. Кроме того, с сайта можно скачать коды различных функций. Как пример можно рассмотреть вычисление с помощью аналитического якобиана кривой 2ого рода. Код приведён ниже:<br>
+<nowiki>
+function inbase(basis, a)
+  line := basis cat [ Universe(basis)!a ];
+  lst := LinearRelation(line : Al := "LLL");
+  if lst[#lst] eq 0 then
+    return 0;
+  else
+    return [ lst[i]/lst[#lst] : i in [1..#lst-1] ];
+  end if;
+end function;
+
+// Section 3: Isogenies
+
+function MyPowerRelation(a, d)
+  pol := PowerRelation(a, d : Al := "LLL");
+  if Degree(pol) le 0 or IsIrreducible(pol) then
+    return pol;
+  else
+    fac := Factorization(pol);
+    _,ind := Min([ Abs(Evaluate(f[1], a)) : f in fac ]);
+    return fac[ind][1];
+  end if;
+end function;
+
+function xi2tau(xi, Ia, cc, pres)
+  // This next line was not necessary in the text because Z had been
+  // defined prior to the function definition.
+  Z := Integers();
+  O := MaximalOrder(Parent(xi));
+  E := Matrix(Z, 4, 4, [ Trace(xi\ast cc(a)*b) : b in Basis(Ia), a in Basis(Ia) ]);
+  _, C := FrobeniusFormAlternating(E);
+  newb := ElementToSequence(Matrix(O, C)*Matrix(O, 4, 1, Basis(Ia)));
+  C := ComplexField(pres);
+  SetKantPrecision(O, pres);
+  Phi := [ i : i in [1..4] | Im(Conjugate(xi, i)) gt 0 ];
+  PMat := Matrix(C, 2, 4, [ Conjugate(b, Phi[1]) : b in newb ] cat
+                          [ Conjugate(b, Phi[2]) : b in newb ]);
+  return Submatrix(PMat, 1, 3, 2, 2)^-1 * Submatrix(PMat, 1, 1, 2, 2);
+end function;
+</nowiki>
