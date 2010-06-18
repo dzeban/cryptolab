@@ -43,8 +43,7 @@ PARI / GP одновременно поддерживает две версии 
 Сокращенная по стоимости студент-версия доступна для ПК (Windows / Linux) и компьютеров Mac (OS X). Студент-версия ограничена рабочей областью 150 мегабайт, и некоторые дополнительные функции опущены.
 
 На официальном сайте Magma для пользователей доступен online-calculator Magma. Кроме того, с сайта можно скачать коды различных функций. Как пример можно рассмотреть вычисление с помощью аналитического якобиана кривой 2ого рода. Код приведён ниже:<br>
-<nowiki>
-function inbase(basis, a)
+ function inbase(basis, a)
   line := basis cat [ Universe(basis)!a ];
   lst := LinearRelation(line : Al := "LLL");
   if lst[#lst] eq 0 then
@@ -74,12 +73,11 @@ function xi2tau(xi, Ia, cc, pres)
   O := MaximalOrder(Parent(xi));
   E := Matrix(Z, 4, 4, [ Trace(xi\ast cc(a)*b) : b in Basis(Ia), a in Basis(Ia) ]);
   _, C := FrobeniusFormAlternating(E);
-  newb := ElementToSequence(Matrix(O, C)*Matrix(O, 4, 1, Basis(Ia)));
-  C := ComplexField(pres);
+  </wiki>newb := ElementToSequence(Matrix(O, C)*Matrix(O, 4, 1, Basis(Ia)));
+  C := ComplexField(pres);</nowiki>
   SetKantPrecision(O, pres);
   Phi := [ i : i in [1..4] | Im(Conjugate(xi, i)) gt 0 ];
   PMat := Matrix(C, 2, 4, [ Conjugate(b, Phi[1]) : b in newb ] cat
                           [ Conjugate(b, Phi[2]) : b in newb ]);
   return Submatrix(PMat, 1, 3, 2, 2)^-1 * Submatrix(PMat, 1, 1, 2, 2);
 end function;
-</nowiki>
