@@ -26,8 +26,8 @@ PARI / GP одновременно поддерживает две версии 
 Найти эллиптическую кривую с наибольшим количеством точек, заданную над полем F<sub>13</sub>.<br>
 Код для PARI / GP :<br>
 ? read("sea.gp");
-? m=0; for(a=0,12,for(b=0,12, trap(,0, E=ellinit([0,0,0,a,b] x Mod(1,13)); t=ellsea(E,13);<br> if(t>m,m=t;B=[a,b]) ) )); print(m); print(B)<br>
+<nowiki>? m=0; for(a=0,12,for(b=0,12, trap(,0, E=ellinit([0,0,0,a,b] * Mod(1,13)); t=ellsea(E,13);<br> if(t>m,m=t;B=[a,b]) ) )); print(m); print(B)<br>
 Ответ:<br>
 21<br>
-{0, 4}<br>
+{0, 4}<br></nowiki>
 Таким образом, наибольшее число точек (равное 21) над  полем F<sub>13</sub> имеет кривая y^2^ = x^3^+4
