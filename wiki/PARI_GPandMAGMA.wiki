@@ -43,10 +43,10 @@ PARI / GP одновременно поддерживает две версии 
 Сокращенная по стоимости студент-версия доступна для ПК (Windows / Linux) и компьютеров Mac (OS X). Студент-версия ограничена рабочей областью 150 мегабайт, и некоторые дополнительные функции опущены.
 
 На официальном сайте Magma для пользователей доступен online-calculator Magma. Кроме того, с сайта можно скачать коды различных функций. Как пример можно рассмотреть вычисление с помощью аналитического якобиана кривой 2ого рода. Код приведён ниже:<br>
- function inbase(basis, a)
-  line := basis cat [ Universe(basis)!a ];
-  lst := LinearRelation(line : Al := "LLL");
-  if lst[#lst] eq 0 then
+ function inbase(basis, a)<br>
+  line := basis cat [ Universe(basis)!a ];<br>
+  lst := LinearRelation(line : Al := "LLL");<br>
+  if lst[#lst] eq 0 then<br>
     return 0;
   else
     return [ lst[i]/lst[#lst] : i in [1..#lst-1] ];
@@ -55,14 +55,14 @@ end function;
 
 // Section 3: Isogenies
 
-function MyPowerRelation(a, d)
-  pol := PowerRelation(a, d : Al := "LLL");
-  if Degree(pol) le 0 or IsIrreducible(pol) then
-    return pol;
+function MyPowerRelation(a, d)<br>
+  pol := PowerRelation(a, d : Al := "LLL");<br>
+  if Degree(pol) le 0 or IsIrreducible(pol) then<br>
+    return pol;<br>
   else
-    fac := Factorization(pol);
-    _,ind := Min([ Abs(Evaluate(f[1], a)) : f in fac ]);
-    return fac[ind][1];
+    fac := Factorization(pol);<br>
+    _,ind := Min([ Abs(Evaluate(f[1], a)) : f in fac ]);<br>
+    return fac[ind][1];<br>
   end if;
 end function;
 
