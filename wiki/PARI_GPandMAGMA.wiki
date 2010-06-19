@@ -43,7 +43,7 @@ PARI / GP одновременно поддерживает две версии 
 Сокращенная по стоимости студент-версия доступна для ПК (Windows / Linux) и компьютеров Mac (OS X). Студент-версия ограничена рабочей областью 150 мегабайт, и некоторые дополнительные функции опущены.
 
 На официальном сайте Magma для пользователей доступен online-calculator Magma. Кроме того, с сайта можно скачать коды различных функций. Как пример можно рассмотреть вычисление с помощью аналитического якобиана кривой 2ого рода. Код приведён ниже:<br>
- function inbase(basis, a)<br>
+ %%function inbase(basis, a)<br>
   line := basis cat [ Universe(basis)!a ];<br>
   lst := LinearRelation(line : Al := "LLL");<br>
   if lst[#lst] eq 0 then<br>
@@ -51,7 +51,7 @@ PARI / GP одновременно поддерживает две версии 
   else
     return [ lst[i]/lst[#lst] : i in [1..#lst-1] ];
   end if;
-end function;
+end function;%%
 
 // Section 3: Isogenies
 
