@@ -26,7 +26,7 @@ PARI / GP одновременно поддерживает две версии 
 Найти эллиптическую кривую с наибольшим количеством точек, заданную над полем F<sub>13</sub>.<br>
 Код для PARI / GP :<br>
 ? read("sea.gp");
-? m=0; for(a=0,12,for(b=0,12, trap(,0, E=ellinit([0,0,0,a,b] x Mod(1,13)); t=ellsea(E,13);<br> if(t>m,m=t;B=[a,b]) ) )); print(m); print(B)<br>
+? m=0; for(a=0,12,for(b=0,12, trap(,0, E=ellinit([0,0,0,a,b] [*] Mod(1,13)); t=ellsea(E,13);<br> if(t>m,m=t;B=[a,b]) ) )); print(m); print(B)<br>
 Ответ:<br>
 21<br>
 {0, 4}<br>
@@ -73,11 +73,11 @@ function xi2tau(xi, Ia, cc, pres)
   O := MaximalOrder(Parent(xi));
   E := Matrix(Z, 4, 4, [ Trace(xi* cc(a)*b) : b in Basis(Ia), a in Basis(Ia) ]);
   , C := FrobeniusFormAlternating(E);
-  newb := ElementToSequence(Matrix(O, C)*Matrix(O, 4, 1, Basis(Ia)));
+  newb := ElementToSequence[(Matrix(O, C)*Matrix(O, 4, 1, Basis(Ia)]));
   C := ComplexField(pres);
   SetKantPrecision(O, pres);
   Phi := [ i : i in [1..4] | Im(Conjugate(xi, i)) gt 0 ];<br>
   PMat := Matrix(C, 2, 4, [ Conjugate(b, Phi[1]) : b in newb ] cat
                           [ Conjugate(b, Phi[2]) : b in newb ]);
-  return Submatrix(PMat, 1, 3, 2, 2)^-1 * Submatrix(PMat, 1, 1, 2, 2);
+  return Submatrix[(PMat, 1, 3, 2, 2)^-1 * Submatrix(PMat, 1, 1, 2, 2)];
 end function;</code>
