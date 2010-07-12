@@ -1,4 +1,4 @@
-#summary криптографические языки PARI/GP и MAGMA.
+#summary криптографические языки PARI/GP и MAGMA
 = PARI/GP и MAGMA =
 
 ==PARI/GP==
