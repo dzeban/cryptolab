@@ -1,4 +1,4 @@
-#summary Task rc1.
+#summary Task rc1
 
 = Задание для Дениса и Михаила =
 
