@@ -65,12 +65,7 @@ start: statement_list ;
 /* 
  * Top rule describing whole file 
  *
- *!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
- **********************************||||
- * FIXME: Error on empty lines 	|||||||
- **********************************||||
- *!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1
- */ 
+*/ 
 
 statement_list: statement_list sep statement 
 				| 
