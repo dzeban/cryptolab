@@ -27,11 +27,14 @@
 %{
 /* Include tokens definition from bison/yacc */
 #include "tokens.h"
-#define YYSTYPE int
-
-/* Variable to store line number */
-int line = 0;
+/*extern YYSTYPE yylval;*/
 %}
+
+%option yylineno
+
+%option nounput
+%option noinput
+%option noyywrap
 
  /* Lexer states */
 %x SL_COMM
@@ -81,8 +84,8 @@ OPERATOR	{ARITHMETIC}|{RELATION}|{BITWISE}
 %%
 
 {NL}	{
-			line++;
-			printf("%s%d:\t", yytext, line);
+			printf("%s%d:\t", yytext, yylineno);
+			yylval.str = strdup(yytext);
 			return(NL);
 		}
 
@@ -119,8 +122,8 @@ OPERATOR	{ARITHMETIC}|{RELATION}|{BITWISE}
 
 <SL_COMM>{NL}	{
 					BEGIN(0);
-					line++;
-					cprintf("%s</>%d:\t", yytext, line);
+					cprintf("%s</>%d:\t", yytext, yylineno);
+					yylval.str = strdup(yytext);
 					return(NL);
 				}
 
@@ -132,6 +135,7 @@ OPERATOR	{ARITHMETIC}|{RELATION}|{BITWISE}
 "\""	{
 			BEGIN(STRING);
 			cprintf("<r>%s", yytext);
+			yylval.str = strdup(yytext);
 			return(D_QUOTE);
 		}
 
@@ -139,11 +143,13 @@ OPERATOR	{ARITHMETIC}|{RELATION}|{BITWISE}
 /*TODO: double quotes escaping, i.e. " \"   \"\" " */
 				BEGIN(0);
 				cprintf("%s </>", yytext);
+				yylval.str = strdup(yytext);
 				return(D_QUOTE);
 			}
 
 <STRING>{ANY}	{
 				printf("%s", yytext);
+				yylval.str = strdup(yytext);
 				return(STRING_CHAR);
 			}
 
@@ -153,26 +159,31 @@ OPERATOR	{ARITHMETIC}|{RELATION}|{BITWISE}
 	 ***********************************************/
 "mod"	{
 			cprintf("<g>%s</>", yytext);
+			yylval.str = strdup(yytext);
 			return(MOD_KW);	
 		}
 
 "echo"	{
 			cprintf("<m>%s</>", yytext);
+			yylval.str = strdup(yytext);
 			return(ECHO_KW);	
 		}
 
 "if"	{
 			cprintf("<m>%s</>", yytext);
+			yylval.str = strdup(yytext);
 			return(IF);
 		}
 
 "else"	{
 			cprintf("<m>%s</>", yytext);
+			yylval.str = strdup(yytext);
 			return(ELSE_KW);
 		}
 
 "Field"		{
 			cprintf("<m>%s</>", yytext);
+			yylval.str = strdup(yytext);
 			return(FIELD_KW);
 			}
 
@@ -183,46 +194,55 @@ OPERATOR	{ARITHMETIC}|{RELATION}|{BITWISE}
 
 "<-"	{
 			printf("%s", yytext);
+			yylval.str = strdup(yytext);
 			return(ASSIGN);
 		}
 
 ">="	{
 			printf("%s", yytext);
+			yylval.str = strdup(yytext);
 			return(RELATIONAL);
 		}
 
 "<="	{
 			printf("%s", yytext);
+			yylval.str = strdup(yytext);
 			return(RELATIONAL);
 		}
 
 "=="	{
 			printf("%s", yytext);
+			yylval.str = strdup(yytext);
 			return(EQEQ_OP);
 		}
 
 "="		{
 			printf("%s", yytext);
+			yylval.str = strdup(yytext);
 			return(*yytext);
 		}
 
 {RELATION}	{
 			printf("%s", yytext);
+			yylval.str = strdup(yytext);
 			return(RELATIONAL);
 			}
 
 {OPERATOR}	{
 			printf("%s", yytext);
+			yylval.str = strdup(yytext);
 			return(*yytext);
 			}
 
 {BRACKET}	{
 			printf("%s", yytext);
+			yylval.str = strdup(yytext);
 			return(*yytext);
 			}
 
 {OTHER_OP} {
 				printf("%s", yytext);
+				yylval.str = strdup(yytext);
 				return(*yytext);
 			}
 	
@@ -230,13 +250,15 @@ OPERATOR	{ARITHMETIC}|{RELATION}|{BITWISE}
 	/************************************************
 	 * 					Stuff part					*
 	 ***********************************************/
-";"			{
-				printf("%s", yytext);
-				return(EOS);
-			}
+";"		{
+			printf("%s", yytext);
+			yylval.str = strdup(yytext);
+			return(EOS);
+		}
 
 {INT}	{
 			cprintf("<y>%s</>", yytext);
+			yylval.str = strdup(yytext);
 			return(INT);
 		}
 
@@ -245,14 +267,9 @@ OPERATOR	{ARITHMETIC}|{RELATION}|{BITWISE}
 	 * 		otherwise it considered as any keyword	*
 	 ***********************************************/
 {IDENT}	{
-			printf("%s",yytext);
+			cprintf("%s",yytext);
+			yylval.str = strdup(yytext);
 			return(IDENT);
 		}
 
 %%
-
-int yywrap(void)
-{
-	printf("\n");
-	return 1;
-}

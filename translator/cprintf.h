@@ -8,12 +8,6 @@
 #include <regex.h>
 #include <stdlib.h>
 
-/* ********************************************************************* */
-/*                                                                       */
-/*                      Zombie Named and Colored Output                  */
-/*                                                                       */
-/* ********************************************************************* */
-
 //Regex for color tags
 #define PATTERN "<[agrybmc/]>"
 #define TMP_SIZE 10
@@ -109,7 +103,7 @@ char* format_process(const char *f)
   return escaped_format;
 }
 
-int cprintf(int who, const char *format, ...)
+int cprintf(const char *format, ...)
 {
 
   va_list args;

@@ -27,16 +27,33 @@
 #include "parser.h"
 #include "cprintf.h"	 /* Colored printf */
 
-
-
-/* Lexer variable that stores line number */
-extern int line;
-
 #ifdef DEBUG
 int yydebug=1;
 #endif
 
 %}
+
+/*	Declare type for tokens. */
+%union{
+	char *str;
+}
+/*
+ *	The only reason why I haven't used this
+ *									     |
+ * 		#define YYSTYPE char *		  <--+	
+ *	
+ *	is a tons of lexer errors about assignement from pointer to integer without
+ *	cast. I tried, i really tried everything that I can but no result.
+ *
+ * 	So i've decided to do this in that way:
+ * 		1. Declare union
+ * 		2. Assign to each token %type<str>
+ * 		3. In lexer use yylval.str = strdup(*yytext);
+ * 		4. ???????
+ * 		5. PROFIT!
+ *
+ * 
+ */ 
 
 %token IDENT
 %token RELATIONAL
@@ -59,6 +76,23 @@ int yydebug=1;
 %left '+' '-' '.' 
 %left '*' '/' '%'
 %left '^'
+
+%type<str> IDENT
+%type<str> RELATIONAL
+%type<str> ASSIGN
+%type<str> EQEQ_OP
+%type<str> STRING_CHAR
+%type<str> D_QUOTE
+%type<str> S_QUOTE
+%type<str> INT
+%type<str> NL
+%type<str> FIELD_KW
+%type<str> ECHO_KW
+%type<str> IF
+%type<str> ELSE_KW
+%type<str> MOD_KW
+%type<str> EOS
+
 %%
 start: statement_list ;
 
@@ -104,6 +138,9 @@ sep:	NL
 
 assign_statement:
 			IDENT ASSIGN assign_statement_operand
+			{
+				printf("------%s-------",$2);
+			}
 			;
 
 assign_statement_operand:
@@ -182,6 +219,9 @@ function_params:	function_params ',' operand
  */
 echo_statement:	
 				ECHO_KW D_QUOTE string D_QUOTE
+				{
+					strcat(GENSTR,"GENERATED!\n");
+				}
 				;
 
 string:	

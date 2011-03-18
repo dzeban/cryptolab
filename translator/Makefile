@@ -29,6 +29,9 @@ lexer.c: lexer.l
 lexer:	lexer.o lexer.c
 	$(CXX) lexer.o -o lexer $(LDFLAGS)
 
+# Separate target for test cls
+test:	rsa.cpp
+	g++ -lgmp -lgmpxx rsa.cpp -o rsa
 # Housekeeping
 clean:
-	rm -f *.o translator parser.c parser.output lexer.c tokens.h
+	rm -f *.o translator rsa parser.c parser.output lexer.c tokens.h

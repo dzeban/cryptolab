@@ -1,11 +1,13 @@
 /*
- * 		main.c 
+ * 		ST.h 
  * 	
- * 	Entry point for Cryptolab language translator. For more info about
- * 	cryptolab see <http://code.google.com/p/cryptolab> or email authors
+ * 	Symbol table declaration and routines for cryptolab language.
+ * 	
+ * 	
+ * 	For more info about cryptolab see <http://code.google.com/p/cryptolab> 
+ * 	or email authors
  * 
  *  Copyright (C) 2010 Alexander Dzyoba <finger@reduct.ru>
- *
  *
  *
  * This program is free software: you can redistribute it and/or modify it under
@@ -21,34 +23,6 @@
  * program. If not, see <http://www.gnu.org/licences/>.
  *
  * 
- *
  */
 
 
-#include "parser.h"
-
-extern FILE *yyin;
-char *filename;
-
-int main(int c, char **a)
-{
-	if(c > 1)
-	{
-		printf("Parsing file: %s...\n-----------------------------------------\n", a[1]);
-		filename = a[1];
-		yyin = fopen(a[1], "r");
-		if(!yyin)
-		{
-			fprintf(stderr, "Error %s", a[1]);
-			perror("fopen");
-			return 1;
-		}
-	}
-
-	yyparse();
-
-	printf("[[[::: Parsing complete :::]]]\n\n");
-	printf("[[[::: Generated code :::]]]\n%s",GENSTR);
-	return 0;
-	
-}
