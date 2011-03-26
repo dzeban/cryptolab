@@ -31,7 +31,7 @@ lexer:	lexer.o lexer.c
 
 # Separate target for test cls
 test:	rsa.cpp
-	g++ -lgmp -lgmpxx rsa.cpp -o rsa
+	g++ -lgmp -lgmpxx -DDEBUG rsa.cpp -o rsa
 # Housekeeping
 clean:
 	rm -f *.o translator rsa parser.c parser.output lexer.c tokens.h
